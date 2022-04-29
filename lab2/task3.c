@@ -10,7 +10,7 @@ int main (int argc, char *argv[]) {
 			char smb;
 			while (smb != '-') {
 				if((smb = getc(stdin)) != EOF) {
-					putc(smb, file);
+					if (smb != '-') putc(smb, file);
 				} else {
 					perror("Read symbol");
 					return 1;

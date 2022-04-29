@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
 	if (argc != 3) {
 		fprintf(stderr, "Parameters: name of file, number of strings\n");
 		return 1;
 	}
-	int N = atoi(argv[2]);
+	char *endptr;
+	int N = strtol(argv[2], &endptr, 10);
+	if ((argv[2] == endptr) || (endptr - argv[2] < strlen(argv[2]))) {
+		fprintf(stderr, "Second parameter must be a number\n");
+		return 1;
+	}
 	if (N < 0) {
 		printf("Invalid number of strings\n");
 		return 1;

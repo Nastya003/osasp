@@ -21,8 +21,18 @@ int main(int argc, char *argv[]) {
 		fputc(smb,f2);
 	}
 	struct stat buf;
-	stat(argv[1], &buf);
-	chmod (argv[2], buf.st_mode);
+	if (stat(argv[1], &buf)) {
+		perror("Stat");
+		fclose(f1);
+		fclose(f2);
+		return 1;
+	}
+	if (chmod (argv[2], buf.st_mode)) {
+		perror("Chmode");
+		fclose(f1);
+		fclose(f2);
+		return 1;
+	}
 	if (fclose(f1)) {
 		perror("Close src file");
 		fclose(f2);
