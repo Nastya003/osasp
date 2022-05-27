@@ -122,15 +122,23 @@ int TailorFunction(int K, int N)
 
 int main(int argc,char *argv[])
 {
-    int K,N;
     if(argc<3)
     {
         fprintf(stderr,"Error:Too few arguments!\n");
         return 1;
     }
 
-    K=atoi(argv[1]);
-    N=atoi(argv[2]);
+ int K = strtol(argv[1], NULL, 10);
+    if (K <= 0) {
+        fprintf(stderr, "Error! Wrong 1st param\n");
+        return 1;
+    }
+    int N = strtol(argv[2], NULL, 10);
+    if (N <= 0) {
+        fprintf(stderr, "Error! Wrong 2nd param\n");
+        return 1;
+    }
+
     TailorFunction(K,N);
     return 0;
 }
